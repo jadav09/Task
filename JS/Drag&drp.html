@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: black;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+        }
+
+        .left,
+        .right {
+            border: 2px dashed white;
+            margin-left: 20px;
+            width: 300px;
+            height: 400px;
+
+        }
+
+        .list {
+            background-color: red;
+            color: white;
+            margin-top: 10px;
+            padding: 10px;
+            margin: 20px;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="left">
+
+            <div class="list" draggable="true">list 1</div>
+            <div class="list" draggable="true">list 2</div>
+            <div class="list" draggable="true">list 3</div>
+            <div class="list" draggable="true">list 4</div>
+        </div>
+
+        <div class="right"></div>
+
+        <script>
+
+            let list1 = document.getElementsByClassName("list")
+            let leftbox = document.querySelector(".left")
+            let rightbox = document.querySelector(".right")
+
+
+
+            for (x of list1) {
+
+                x.addEventListener("dragstart", (e) => {
+                    let triger = e.target
+
+                    rightbox.addEventListener("dragover", (e) => {
+                        e.preventDefault()
+                    })
+
+                    rightbox.addEventListener("drop", (e) => {
+                        e.preventDefault()
+                        rightbox.appendChild(triger)
+                        triger = ''
+                    })
+
+                    leftbox.addEventListener("dragover", (e) => {
+                        e.preventDefault()
+
+
+                    })
+
+                    leftbox.addEventListener("drop", (e) => {
+                        e.preventDefault()
+                        leftbox.appendChild(triger)
+                        triger = ''
+
+                    })
+
+                })
+
+
+            }
+
+        </script>
+    </div>
+</body>
+
+</html>
